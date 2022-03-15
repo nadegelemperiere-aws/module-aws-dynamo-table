@@ -31,10 +31,10 @@ ${REGION}                           eu-west-1
 Prepare environment
     [Documentation]         Retrieve principal credential from database and initialize python tests keywords
     ${keepass_key}          Get Environment Variable          ${KEEPASS_KEY_ENV}
-    ${principal_access}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}            username
-    ${principal_secret}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}            password
+    ${principal_access}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}    username
+    ${principal_secret}     Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_PRINCIPAL_KEY_ENTRY}    password
     ${principal_name}       Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_PRINCIPAL_USERNAME}     username
-    ${account}              Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_ACCOUNT_ENTRY}            password
+    ${account}              Load Keepass Database Secret      ${KEEPASS_DATABASE}     ${keepass_key}  ${KEEPASS_ACCOUNT_ENTRY}          password
     Initialize Terraform    ${REGION}   ${principal_access}   ${principal_secret}
     Initialize DynamoDB     None        ${principal_access}   ${principal_secret}    ${REGION}
     ${TF_PARAMETERS}=       Create Dictionary   account=${account}    service_principal=${principal_name}
