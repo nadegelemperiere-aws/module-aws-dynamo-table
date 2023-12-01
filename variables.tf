@@ -1,20 +1,13 @@
 # -------------------------------------------------------
-# TECHNOGIX
-# -------------------------------------------------------
-# Copyright (c) [2022] Technogix SARL
+# Copyright (c) [2022] Nadege Lemperiere
 # All rights reserved
 # -------------------------------------------------------
 # Module to deploy an aws dynamodb with all the secure
 # components required
 # -------------------------------------------------------
 # Nadège LEMPERIERE, @21 january 2021
-# Latest revision: 21 january 2021
+# Latest revision: 30 november 2023
 # -------------------------------------------------------
-
-
-terraform {
-	experiments = [ module_variable_optional_attrs ]
-}
 
 
 # -------------------------------------------------------
@@ -22,6 +15,7 @@ terraform {
 # -------------------------------------------------------
 variable "email" {
     type     = string
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -29,9 +23,11 @@ variable "email" {
 # -------------------------------------------------------
 variable "environment" {
     type     = string
+	nullable = false
 }
 variable "region" {
     type     = string
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -39,9 +35,11 @@ variable "region" {
 # -------------------------------------------------------
 variable "project" {
     type    = string
+	nullable = false
 }
 variable "module" {
     type     = string
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -50,6 +48,7 @@ variable "module" {
 variable "git_version" {
     type    = string
     default = "unmanaged"
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -57,6 +56,7 @@ variable "git_version" {
 # -------------------------------------------------------
 variable "name" {
     type = string
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -64,6 +64,7 @@ variable "name" {
 # -------------------------------------------------------
 variable "hash" {
     type     = string
+	nullable = false
 }
 variable "range" {
     type     = string
@@ -74,6 +75,7 @@ variable "attributes" {
         name = string
         type = string
     }))
+	nullable = false
 }
 
 # -------------------------------------------------------
@@ -84,6 +86,7 @@ variable "capacity" {
         read    = number
         write   = number
     })
+	nullable = false
 }
 
 # --------------------------------------------------------
@@ -101,8 +104,10 @@ variable "rights" {
     default = null
 }
 variable "service_principal" {
-    type = string
+    type     = string
+	nullable = false
 }
 variable "account" {
-    type = string
+    type     = string
+	nullable = false
 }
