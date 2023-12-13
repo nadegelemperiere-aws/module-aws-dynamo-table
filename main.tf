@@ -1,14 +1,12 @@
 # -------------------------------------------------------
-# TECHNOGIX
-# -------------------------------------------------------
-# Copyright (c) [2022] Technogix SARL
+# Copyright (c) [2022] Nadege Lemperiere
 # All rights reserved
 # -------------------------------------------------------
 # Module to deploy an aws dynamodb with all the secure
 # components required
 # -------------------------------------------------------
 # Nadège LEMPERIERE, @21 january 2021
-# Latest revision: 21 january 2021
+# Latest revision: 30 november 2023
 # -------------------------------------------------------
 
 # -------------------------------------------------------
@@ -59,13 +57,13 @@ resource "aws_dynamodb_table" "table" {
 # -------------------------------------------------------
 locals {
     kms_statements = concat([
-        for i,right in (("${var.rights}" != null) ? "${var.rights}" : []) :
+        for i,right in ((var.rights != null) ? var.rights : []) :
         {
             Sid           = right.description
             Effect        = "Allow"
             Principal     = {
-                "AWS"         : (("${right.principal.aws}" != null) ? "${right.principal.aws}" : [])
-                "Service"     : (("${right.principal.services}" != null) ? "${right.principal.services}" : [])
+                "AWS"         : ((right.principal.aws != null) ? right.principal.aws : [])
+                "Service"     : ((right.principal.services != null) ? right.principal.services : [])
             }
             Action         = ["kms:Decrypt","kms:GenerateDataKey"],
             Resource    = ["*"]
@@ -96,7 +94,7 @@ resource "aws_kms_key" "table" {
     enable_key_rotation            = true
     policy                        = jsonencode({
           Version = "2012-10-17",
-          Statement = "${local.kms_statements}"
+          Statement = local.kms_statements
     })
 
     tags = {
